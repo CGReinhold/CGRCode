@@ -1,0 +1,17 @@
+{
+  "name": "cgrcode",
+  "version": "1.0.0",
+  "description": "",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest",
+    "dist": "npx webpack"
+  },
+  "author": "Cleyson Reinhold",
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^24.8.0",
+    "webpack": "^4.39.1",
+    "webpack-cli": "^3.3.6"
+  }
+}
