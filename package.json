@@ -1,14 +1,15 @@
 {
   "name": "cgrcode",
   "version": "1.0.0",
-  "description": "",
+  "description": "Framework for generating CGRCode on canvas",
   "main": "src/index.js",
+  "homepage": "https://github.com/CGReinhold/CGRCode",
   "scripts": {
     "test": "jest",
     "dist": "npx webpack"
   },
   "author": "Cleyson Reinhold",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "jest": "^24.8.0",
     "webpack": "^4.39.1",
