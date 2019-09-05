@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="./cgrcode.js"></script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body onload="pageLoad()" onresize="render()">
+  <header>
+    <h1>
+      CGR Code
+    </h1>
+  </header>
+  <div class="main">
+    <div class="imagem">
+      <div id="canvas" class="canvas"></div>
+      <div class="salvar" onclick="save()">Save as png</div>
+    </div>
+    <div class="form">
+      <form>
+        <div class="form-group">
+          <label for="text">Text:</label>
+          <input class="form-control " id="text" type="text" value="test" oninput="render()" />
+        </div>
+        <div class="styling">
+          <div class="group-collapse">
+            <div class="group-head" onclick="expandAccordion(this)">
+              <h5>Style</h5>
+              <svg class="chevron" viewBox="0 0 448 512"><path fill="currentColor" d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z" class=""></path></svg>
+            </div>
+            <div class="group-content">
+              <div class="form-group">
+                <label for="shape">Shape</label>
+                <select class="form-control" id="shape" onchange="render()">
+                  <option value="square">Square</option>
+                  <option value="circle">Circle</option>
+                  <option value="triangle">Triangle</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="symbols">Symbols</label>
+                <select class="form-control" id="symbols" onchange="render()">
+                  <option value="squares">Squares</option>
+                  <option value="circles">Circles</option>
+                  <option value="triangles">Triangles</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="symbolHeight">Size of the symbols:</label>
+                <div class="form-control">
+                  <div class="range-label">1</div>
+                  <input id="symbolHeight" type="range" min="1" max="500" value="13" oninput="render()" />
+                  <div class="range-label">500</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="symbolWidth">Width of the symbols:</label>
+                <div class="form-control">
+                  <div class="range-label">1</div>
+                  <input id="symbolWidth" type="range" min="1" max="20" value="2" oninput="render()" />
+                  <div class="range-label">20</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="symbolMargin">Margin of the symbols:</label>
+                <div class="form-control">
+                  <div class="range-label">1</div>
+                  <input class="form-control" id="symbolMargin" type="range" min="1" max="500" value="17" onchange="render()" />
+                  <div class="range-label">500</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="marginY">External margin Y:</label>
+                <div class="form-control">
+                  <div class="range-label">1</div>
+                  <input class="form-control" id="marginY" type="range" min="1" max="1000" value="27" oninput="render()" />
+                  <div class="range-label">1000</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="marginX">External margin X:</label>
+                <div class="form-control">
+                  <div class="range-label">1</div>
+                  <input class="form-control" id="marginX" type="range" min="1" max="1000" value="36" oninput="render()" />
+                  <div class="range-label">1000</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="rotation">Rotation:</label>
+                <div class="form-control">
+                  <div class="range-label">-360°</div>
+                  <input class="form-control" id="rotation" type="range" min="-360" max="360" value="0" oninput="render()" />
+                  <div class="range-label">360°</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="group-collapse">
+            <div class="group-head" onclick="expandAccordion(this)">
+              <h5>Colors</h5>
+              <svg class="chevron" viewBox="0 0 448 512"><path fill="currentColor" d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z" class=""></path></svg>
+            </div>
+            <div class="group-content">
+              <div class="form-group">
+                <label for="color">Color of the symbols:</label>
+                <input class="form-control" id="color" type="color" value="#231F20" onchange="render()" />
+              </div>
+              <div class="form-group">
+                <label for="backgroundColor">Background color:</label>
+                <input class="form-control" id="backgroundColor" type="color" value="#ffffff" onchange="render()" />
+              </div>
+            </div>
+          </div>
+          <div class="group-collapse">
+            <div class="group-head" onclick="expandAccordion(this)">
+              <h5>Image</h5>
+              <svg class="chevron" viewBox="0 0 448 512"><path fill="currentColor" d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z" class=""></path></svg>
+            </div>
+            <div class="group-content">
+              <div class="form-group">
+                <label for="image">Image URL:</label>
+                <input class="form-control" id="image" type="text" value="https://images.ctfassets.net/2d5q1td6cyxq/2SqLXL2zJmcUUI2QSkUCy6/71701594cb1fdf6f2e60d34297262d6b/square.01.jpg" onchange="renderImage()" />
+              </div>
+              <div class="form-group">
+                <label for="imageSource">Image:</label>
+                <input class="form-control" id="imageSource" type="file" accept="image/*" />
+              </div>
+              <div class="form-group">
+                <label for="imageXMargin">Image margin X:</label>
+                <div class="form-control">
+                  <div class="range-label">-200</div>
+                  <input class="form-control" id="imageXMargin" type="range" min="-200" max="1000" value="-1" onchange="render()" />
+                  <div class="range-label">1000</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="imageYMargin">Image margin Y:</label>
+                <div class="form-control">
+                  <div class="range-label">-200</div>
+                  <input class="form-control" id="imageYMargin" type="range" min="-200" max="1000" value="-1" onchange="render()" />
+                  <div class="range-label">1000</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="imageWidth">Image width:</label>
+                <div class="form-control">
+                  <div class="range-label">10</div>
+                  <input class="form-control" id="imageWidth" type="range" min="10" max="1000" value="225" onchange="render()" />
+                  <div class="range-label">1000</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="imageHeight">Image height:</label>
+                <div class="form-control">
+                  <div class="range-label">10</div>
+                  <input class="form-control" id="imageHeight" type="range" min="10" max="1000" value="225" onchange="render()" />
+                  <div class="range-label">1000</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="imageRotation">Image rotation:</label>
+                <div class="form-control">
+                  <div class="range-label">-360°</div>
+                  <input class="form-control" id="imageRotation" type="range" min="-360" max="360" value="0" onchange="render()" />
+                  <div class="range-label">360°</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+    var loadedImage = '';
+
+    function expandAccordion(element) {
+      const panel = element.nextElementSibling;
+      const chevron = element.children[1];
+      const estaAtivo = panel.classList.contains('active');
+
+      const actives = document.getElementsByClassName('active');
+      if (actives && actives.length) {
+        for (let i = 0; i < actives.length; i++) {
+          actives[i].parentNode.children[0].children[1].style.webkitTransform = 'rotate(0deg)';
+          actives[i].parentNode.children[0].children[1].style.mozTransform = 'rotate(0deg)';
+          actives[i].parentNode.children[0].children[1].style.msTransform = 'rotate(0deg)';
+          actives[i].parentNode.children[0].children[1].style.oTransform = 'rotate(0deg)';
+          actives[i].parentNode.children[0].children[1].style.transform = 'rotate(0deg)';
+          actives[i].style.display = 'none';
+          actives[i].classList.remove('active');
+        }
+      }
+
+      if (panel && !estaAtivo) {
+        panel.classList.add('active');
+        panel.style.display = 'block';
+        chevron.style.webkitTransform = 'rotate(180deg)';
+        chevron.style.mozTransform    = 'rotate(180deg)';
+        chevron.style.msTransform     = 'rotate(180deg)';
+        chevron.style.oTransform      = 'rotate(180deg)';
+        chevron.style.transform       = 'rotate(180deg)';
+      }
+    }
+
+    function renderImageSource(e) {
+      var reader = new FileReader();
+      reader.onload = function(event) {
+        loadedImage = event.target.result; 
+        document.getElementById('image').value = '';
+        render();
+      }
+      reader.readAsDataURL(e.target.files[0]);
+    }
+
+    function pageLoad() {
+      render();
+
+      var imageLoader = document.getElementById('imageSource');
+      imageLoader.addEventListener('change', renderImageSource, false);
+    }
+
+    function renderImage() {
+      loadedImage = document.getElementById('image').value;
+      render();
+    }
+
+    function render() {
+      const height = screen.width > 600 ? screen.width / 2 - 150 : screen.width - 60;
+      // const height = 1000;
+      const differenceHeight = screen.width > 600 ? 1 : ((100 - ((height * 100) / 350)) / 100) * 3;
+
+      const text = document.getElementById('text').value;
+      const marginX = Number(document.getElementById('marginY').value) * differenceHeight;
+      const marginY = Number(document.getElementById('marginX').value) * differenceHeight;
+      const rotation = Number(document.getElementById('rotation').value);
+      const color = document.getElementById('color').value;
+      const backgroundColor = document.getElementById('backgroundColor').value;
+      const symbols = document.getElementById('symbols').value;
+      const shape = document.getElementById('shape').value;
+      const symbolWidth = Number(document.getElementById('symbolWidth').value);
+      const symbolHeight = Number(document.getElementById('symbolHeight').value) * differenceHeight;
+      let symbolMargin = Number(document.getElementById('symbolMargin').value) * differenceHeight;
+      if (shape === 'circle') {
+        symbolMargin += 70;
+      }
+      const imageXMargin = Number(document.getElementById('imageXMargin').value) * differenceHeight;
+      const imageYMargin = Number(document.getElementById('imageYMargin').value) * differenceHeight;
+      const imageWidth = Number(document.getElementById('imageWidth').value) * differenceHeight;
+      const imageHeight = Number(document.getElementById('imageHeight').value) * differenceHeight;
+      const imageRotation = Number(document.getElementById('imageRotation').value);
+      const image = loadedImage || document.getElementById('image').value;
+
+      const code = new CGRCode({ 
+        text,
+        height: height / 2,
+        marginX,
+        marginY,
+        rotation,
+        color,
+        backgroundColor,
+        symbols,
+        shape,
+        symbolWidth,
+        symbolHeight,
+        symbolMargin,
+        image: image,
+        imageXMargin,
+        imageYMargin,
+        imageWidth,
+        imageHeight,
+        imageRotation,
+        style: 'border-radius: 10px; margin: 20px;'
+      });
+      code.generate('canvas');
+      this.code = code;
+    }
+
+    function save() {
+      this.code.save();
+    }
+  </script>
+</body>
+</html>
